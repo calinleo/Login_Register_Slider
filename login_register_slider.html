@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Register Slider</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        background: #f6f5f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.22);
+        position: relative;
+        overflow: hidden;
+        width: 768px;
+        max-width: 100%;
+        min-height: 480px;
+      }
+      .form-container {
+        position: absolute;
+        top: 110px;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+      }
+      .sign-in-container {
+        left: 0;
+        width: 50%;
+        opacity: 1;
+        z-index: 2;
+      }
+      .sign-up-container {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+      }
+      .container.right-panel-active .sign-in-container {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      .container.right-panel-active .sign-up-container {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+      }
+
+      .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+      }
+
+      .overlay {
+        background: #920aa2;
+        background: -webkit-linear-gradient(to right, #ff4b2b, #920aa2);
+        background: linear-gradient(to right, #ff4b2b, #920aa2);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 0 0;
+        color: #ffffff;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+      }
+      .container.right-panel-active .overlay-container {
+        transform: translateX(-100%);
+      }
+
+      .overlay-panel {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+      }
+      .overlay-left {
+        left: 0;
+        transform: translateX(-20%);
+      }
+      .container.right-panel-active .overlay-left {
+        /* transform: translateX(0); */
+        transform: translateX(100%);
+      }
+
+      .overlay-right {
+        right: 0;
+        transform: translateX(0);
+      }
+      .container.right-panel-active .overlay-right {
+        /* transform: translateX(20%); */
+        transform: translateX(100%);
+      }
+      button {
+        border: none;
+        padding: 10px 20px;
+        background-color: #920aa2;
+        color: #ffffff;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: transform 80ms ease-in;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      button.ghost {
+        background-color: transparent;
+        border: 2px solid #ffffff;
+      }
+      input[type="text"] {
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 2px solid #920aa2;
+        background-color: #fff;
+        color: #414141;
+        border-radius: 50px;
+      }
+      input[type="email"] {
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 2px solid #920aa2;
+        background-color: #fff;
+        color: #414141;
+        border-radius: 50px;
+      }
+      input[type="password"] {
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 2px solid #920aa2;
+        background-color: #fff;
+        color: #414141;
+        border-radius: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container sign-up-container">
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <form
+            id="registerForm"
+            onsubmit="event.preventDefault(alert('This is demo only \nPlease click <Sign in> button !'));"
+          >
+            <div style="color: #920aa2"><h1>Create Account</h1></div>
+            <div>
+              <input type="text" placeholder="Name" />
+            </div>
+            <div>
+              <input type="email" placeholder="Email" />
+            </div>
+            <div>
+              <input type="password" placeholder="Password" />
+            </div>
+            <div>
+              <button type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="form-container sign-in-container">
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <form
+            id="loginForm"
+            onsubmit="event.preventDefault(alert('This is demo only \nPlease click <Sign up> button !'));"
+          >
+            <div style="color: #920aa2"><h1>Sign in</h1></div>
+            <div>
+              <input type="email" placeholder="Email" />
+            </div>
+            <div><input type="password" placeholder="Password" /></div>
+            <div><button type="submit">Login</button></div>
+          </form>
+        </div>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>
+              If you already have an account with us please login below with
+              your info
+            </p>
+            <button class="ghost" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p>
+              Register your credentials and start journey with us by creating an
+              account below
+            </p>
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementById("signUp").addEventListener("click", () => {
+        document
+          .querySelector(".container")
+          .classList.add("right-panel-active");
+        // .classList.remove("sign-in-container");
+      });
+
+      document.getElementById("signIn").addEventListener("click", () => {
+        document
+          .querySelector(".container")
+          .classList.remove("right-panel-active");
+        // .classList.add("right-panel-active");
+      });
+    </script>
+  </body>
+</html>
